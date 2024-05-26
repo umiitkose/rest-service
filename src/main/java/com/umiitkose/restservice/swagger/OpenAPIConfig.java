@@ -1,11 +1,10 @@
-package tr.gov.turkiye.edkservicedeskbackend.base.swagger;
+package com.umiitkose.restservice.swagger;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,16 +12,13 @@ import java.util.List;
 
 //https://springdoc.org/
 //https://github.com/springdoc/springdoc-openapi
-//
 
+//http://localhost:8080/swagger-ui/index.html
 @Configuration
 public class OpenAPIConfig {
 
-    @Value("${edk.support.dev-url}")
-    private String devUrl;
-
-    @Value("${edk.support.canli-url}")
-    private String prodUrl;
+    private final static String devUrl="localhost:8080";
+    private final static String prodUrl="canliURL:8080";
 
     @Bean
     public OpenAPI myOpenAPI() {
@@ -39,13 +35,13 @@ public class OpenAPIConfig {
         contact.setName("Ümit KÖSE");
         contact.setUrl("https://www.umiitkose.com");
 
-        License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
+        License mitLicense = new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0.html");
 
         Info info = new Info()
                 .title("Service API Documentation")
                 .version("1.0")
                 .contact(contact)
-                .description("This API exposes endpoints to manage tutorials.").termsOfService("https://www.umiitkose.com/terms")
+                .description("This API exposes endpoints to manage tutorials.").termsOfService("https://localhost:8080/terms")
                 .license(mitLicense);
 
         return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
